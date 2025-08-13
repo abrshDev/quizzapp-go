@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 
 	"github.com/abrshDev/insta-scrapper/scrape"
 	"github.com/gofiber/fiber/v2"
@@ -148,5 +149,9 @@ func main() {
 		})
 	})
 
-	app.Listen(":3000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000" // fallback for local dev
+	}
+	app.Listen(":" + port)
 }
